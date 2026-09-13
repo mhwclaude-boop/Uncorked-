@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" data-continent="europe">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Uncorked — learn the wine world, region by region</title>
+<meta name="description" content="A map-first guide to the world's wine regions. Start with Champagne: chalk, three grapes, and the long way round to a bubble.">
+<meta name="theme-color" content="#0C1018">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1&family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230C1018'/%3E%3Cpath d='M10 6h12l-1.2 8.4A4.9 4.9 0 0 1 16 18.6a4.9 4.9 0 0 1-4.8-4.2z' fill='none' stroke='%23C8A44D' stroke-width='1.6' stroke-linejoin='round'/%3E%3Cpath d='M16 18.6V25M12.4 25h7.2' stroke='%23C8A44D' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <a class="brand" href="#/map" aria-label="Uncorked home">
+    <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+      <path d="M10 5h12l-1.3 9A4.8 4.8 0 0 1 16 18.4 4.8 4.8 0 0 1 11.3 14z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M16 18.4V26M12.3 26h7.4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      <circle cx="16" cy="9.4" r="1.15" fill="currentColor"/>
+      <circle cx="13.2" cy="12.2" r=".8" fill="currentColor"/>
+      <circle cx="18.7" cy="12.6" r=".62" fill="currentColor"/>
+    </svg>
+    <span class="brand-word">Uncorked</span>
+  </a>
+
+  <nav class="viewswitch" aria-label="Browse regions">
+    <a href="#/map" data-view-link="map">Map</a>
+    <a href="#/list" data-view-link="list">List</a>
+  </nav>
+
+  <button class="progress-pill" id="progress-pill" type="button" aria-label="Your progress">
+    <span id="progress-count">0</span><span class="progress-sep">/</span><span id="progress-total">0</span>
+    <span class="progress-word">read</span>
+  </button>
+</header>
+
+<main id="main" tabindex="-1">
+  <section id="view-map" class="view" hidden>
+    <div class="map-intro">
+      <h1>Every bottle comes from somewhere.</h1>
+      <p>Pick a place to learn how its wine is grown, made and named. One region is open so far — the rest are on the way.</p>
+    </div>
+
+    <div class="mapwrap">
+      <div class="map-stage" id="map-stage">
+        <svg id="worldmap" viewBox="-16 14 1032 400" preserveAspectRatio="xMidYMid meet" role="application" aria-label="World map of wine regions. Use the list view for a text alternative.">
+          <g id="map-pan">
+            <g id="map-countries" aria-hidden="true"></g>
+            <g id="map-pins"></g>
+          </g>
+        </svg>
+        <div class="map-controls">
+          <button type="button" id="zoom-in" aria-label="Zoom in">+</button>
+          <button type="button" id="zoom-out" aria-label="Zoom out">−</button>
+          <button type="button" id="zoom-reset" aria-label="Reset map">Reset</button>
+        </div>
+        <p class="map-hint" id="map-hint">Drag to pan, scroll to zoom, tap a country to see its regions</p>
+      </div>
+
+      <aside class="map-panel" id="map-panel" aria-live="polite">
+        <div class="map-panel-empty">
+          <h2>Regions on the map</h2>
+          <p>Tap a gold marker to see which regions sit inside that country. A filled marker means there is something to read today.</p>
+          <a class="btn btn-gold" href="#/region/champagne">Open Champagne</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section id="view-list" class="view" hidden>
+    <div class="list-head">
+      <h1>All regions</h1>
+      <div class="filters">
+        <label class="search">
+          <span class="sr-only">Search regions</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M16 16l4.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <input type="search" id="region-search" placeholder="Search region, country or grape country…" autocomplete="off">
+        </label>
+        <div class="chips" id="continent-filters" role="group" aria-label="Filter by continent"></div>
+      </div>
+    </div>
+    <div class="region-grid" id="region-grid"></div>
+    <p class="list-empty" id="list-empty" hidden>No regions match that. Try a different word.</p>
+  </section>
+
+  <section id="view-region" class="view" hidden></section>
+</main>
+
+<footer class="sitefoot">
+  <p>Uncorked — a personal wine-education project. Drink less, notice more.</p>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<script src="world-map.js"></script>
+<script src="regions-data.js"></script>
+<script src="components.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
